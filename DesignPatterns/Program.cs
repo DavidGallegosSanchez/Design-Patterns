@@ -3,6 +3,7 @@ using DesignPatterns.Creational.Builder;
 using DesignPatterns.Creational.Factory;
 using DesignPatterns.Creational.Prototype;
 using DesignPatterns.Creational.Singleton;
+using DesignPatterns.Structural.Adapter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace DesignPatterns
 
             
             // Prototype
-            Console.WriteLine("*** Prototype pattern ***");
+            Console.WriteLine("\n*** Prototype pattern ***");
             Monster prototype = new Monster("Goblin", "Green", new MonsterStats(100, 25));
             Console.WriteLine("--- Original State ---");
             prototype.DisplayInfo();
@@ -77,7 +78,7 @@ namespace DesignPatterns
 
             
             // Singleton
-            Console.WriteLine("*** Singleton pattern ***");
+            Console.WriteLine("\n*** Singleton pattern ***");
             Console.WriteLine("--- Init application ---");
 
             // Request the service for the first time (the internal constructor is executed)
@@ -93,6 +94,18 @@ namespace DesignPatterns
             {
                 Console.WriteLine("\n logger1 and logger2 are exactly the same instance.");
             }
+
+            // Adapter
+            Console.WriteLine("\n*** Adapter pattern ***");
+            // 1. Create an instance of the external service
+            PayPalService legacyPaypal = new PayPalService();
+
+            // 2. Wrap it in our adapter
+            IOrderProcessor proccesor = new PayPalAdapter(legacyPaypal);
+
+            // 3. The application can use it transparently
+            Console.WriteLine("Init process of order...");
+            proccesor.ProcessPayment("ORD-2026-99", 150.50m);
         }
     }
 }
