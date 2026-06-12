@@ -4,6 +4,7 @@ using DesignPatterns.Creational.Factory;
 using DesignPatterns.Creational.Prototype;
 using DesignPatterns.Creational.Singleton;
 using DesignPatterns.Structural.Adapter;
+using DesignPatterns.Structural.Bridge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,6 +107,24 @@ namespace DesignPatterns
             // 3. The application can use it transparently
             Console.WriteLine("Init process of order...");
             proccesor.ProcessPayment("ORD-2026-99", 150.50m);
+
+            // Bridge
+            Console.WriteLine("\n*** Bridge pattern ***");
+            // Instantiate delivery channels (Implementations)
+            ISendingChannel email = new EmailDelivery();
+            ISendingChannel sms = new SMSDelivery();
+
+            // Combination 1: Normal Message via Email
+            Message message1 = new NormalMessage(email);
+            message1.ProcessAndSend("Your monthly invoice is now available.");
+
+            // Combination 2: Urgent Message via SMS
+            Message message2 = new UrgentMessage(sms);
+            message2.ProcessAndSend("Unauthorized access attempt detected on your account.");
+
+            // We can easily switch the channel if needed
+            Message message3 = new UrgentMessage(email);
+            message3.ProcessAndSend("Main server downtime detected.");
         }
     }
 }

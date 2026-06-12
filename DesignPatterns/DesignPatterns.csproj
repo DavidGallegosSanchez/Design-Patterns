@@ -60,6 +60,12 @@
     <Compile Include="Structural\Adapter\IOrderProcessor.cs" />
     <Compile Include="Structural\Adapter\PayPalAdapter.cs" />
     <Compile Include="Structural\Adapter\PayPalService.cs" />
+    <Compile Include="Structural\Bridge\EmailDelivery.cs" />
+    <Compile Include="Structural\Bridge\ISendingChannel.cs" />
+    <Compile Include="Structural\Bridge\Message.cs" />
+    <Compile Include="Structural\Bridge\NormalMessage.cs" />
+    <Compile Include="Structural\Bridge\SMSDelivery.cs" />
+    <Compile Include="Structural\Bridge\UrgentMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
